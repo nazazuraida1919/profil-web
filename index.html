@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Naza Zuraida</title>
+  <meta name="description" content="Profil Naza Zuraida, mahasiswa S1 Teknik Logistik Universitas Pendidikan Indonesia: profil, pengalaman, dan kontak.">
+  <meta name="theme-color" content="#101B33" id="themeColor">
+  <meta property="og:title" content="Naza Zuraida">
+  <meta property="og:description" content="Mahasiswa S1 Teknik Logistik, Universitas Pendidikan Indonesia.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23101B33%22/><rect x=%228%22 y=%228%22 width=%2284%22 height=%2284%22 fill=%22none%22 stroke=%22%23D6BB7E%22 stroke-width=%224%22/><text x=%2250%22 y=%2265%22 font-size=%2244%22 font-family=%22serif%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22%23D6BB7E%22>NZ</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold: #D6BB7E;
+      --ivory: #F5EFE3;
+      --ink: #14121A;
+      --muted: rgba(245, 239, 227, .74);
+      --hair: rgba(214, 187, 126, .38);
+      --serif: "Cormorant Garamond", "Palatino Linotype", Georgia, serif;
+      --sans: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --ease: cubic-bezier(.65, 0, .35, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; overflow: hidden; }
+    body { background: #101B33; color: var(--ivory); font-family: var(--sans); font-size: 1.05rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, p, figure { margin: 0; }
+    a { color: inherit; }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+    /* ---------- Panggung & slide ---------- */
+    .stage { position: fixed; inset: 0; --cur: 0; overflow: hidden; }
+    .slide {
+      position: absolute; inset: 0;
+      background: var(--bg);
+      transform: translateX(calc((var(--i) - var(--cur)) * 100%));
+      transition: transform .9s var(--ease), visibility 0s .9s;
+      visibility: hidden;
+    }
+    .slide.active { visibility: visible; transition: transform .9s var(--ease), visibility 0s 0s; }
+    .slide::before {
+      content: ""; position: absolute; inset: 14px; border: 1px solid var(--hair); pointer-events: none; z-index: 1;
+    }
+    .s-navy  { --bg: #101B33; }
+    .s-green { --bg: #14352E; }
+    .s-wine  { --bg: #46192A; }
+    .s-slate { --bg: #232B36; }
+
+    .inner {
+      position: relative; height: 100%;
+      padding: 84px clamp(2rem, 6vw, 5.5rem) 92px;
+      display: grid; align-items: center; gap: clamp(1.5rem, 4vw, 4rem);
+    }
+
+    /* ---------- Bar atas ---------- */
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(2rem, 6vw, 5.5rem); height: 72px;
+    }
+    .mini-logo { display: flex; align-items: center; gap: .75rem; text-decoration: none; background: none; border: 0; padding: 0; }
+    .mini-logo .mark { width: 34px; height: 34px; border: 1.5px solid var(--gold); display: grid; place-items: center; font-family: var(--serif); font-weight: 700; font-size: 1.05rem; color: var(--gold); }
+    .mini-logo span.t { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; letter-spacing: .02em; }
+    .tabs { display: flex; gap: .25rem; }
+    .tab { background: none; border: 0; padding: .55rem 1rem; font-weight: 500; font-size: .98rem; color: var(--muted); position: relative; transition: color .25s; }
+    .tab::after { content: ""; position: absolute; left: 1rem; right: 1rem; bottom: .2rem; height: 1.5px; background: var(--gold); transform: scaleX(0); transition: transform .35s var(--ease); }
+    .tab:hover { color: var(--ivory); }
+    .tab[aria-current="page"] { color: var(--gold); }
+    .tab[aria-current="page"]::after { transform: scaleX(1); }
+
+    /* ---------- Kontrol bawah ---------- */
+    .controls {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+      height: 84px; padding: 0 clamp(2rem, 6vw, 5.5rem);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-btn {
+      display: inline-flex; align-items: center; gap: .65rem;
+      background: transparent; border: 1px solid var(--hair); padding: .7rem 1.25rem;
+      font-weight: 500; transition: background .25s, color .25s, border-color .25s, opacity .25s;
+    }
+    .nav-btn:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+    .nav-btn[disabled] { opacity: 0; pointer-events: none; }
+    .nav-btn svg { width: 18px; height: 18px; }
+    .dots { display: flex; gap: .7rem; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--gold); background: transparent; padding: 0; transition: background .25s, transform .25s; }
+    .dot[aria-current="page"] { background: var(--gold); transform: scale(1.2); }
+
+    /* ---------- Elemen bersama ---------- */
+    .rule { width: 72px; height: 2px; background: var(--gold); margin: 1.4rem 0; }
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: .65rem; margin-top: 1.9rem;
+      background: var(--gold); color: var(--ink); border: 1px solid var(--gold);
+      padding: .9rem 1.6rem; font-weight: 600; transition: background .25s, color .25s;
+    }
+    .btn-gold:hover { background: transparent; color: var(--gold); }
+    .btn-gold svg { width: 18px; height: 18px; }
+    h2.title { font-family: var(--serif); font-weight: 600; font-size: clamp(2.2rem, min(5vw, 9vh), 3.8rem); line-height: 1.05; letter-spacing: -.005em; }
+
+    .ph { position: relative; height: 100%; min-height: 0; }
+    .ph::after { content: ""; position: absolute; inset: 0; transform: translate(12px, 12px); border: 1px solid var(--gold); pointer-events: none; }
+    .ph-box { position: relative; width: 100%; height: 100%; overflow: hidden; background: rgba(255, 255, 255, .07); display: grid; place-items: center; text-align: center; z-index: 1; }
+    .ph-box img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .ph-box .ph-empty { color: var(--muted); font-size: .9rem; padding: 1rem; }
+    .ph-box .ph-empty svg { display: block; width: 34px; height: 34px; margin: 0 auto .5rem; color: var(--gold); }
+
+    /* ---------- 1. Beranda ---------- */
+    .home { grid-template-columns: 1.15fr .85fr; }
+    .emblem { display: flex; align-items: center; gap: 1.1rem; }
+    .emblem .mark {
+      width: clamp(64px, 11vh, 92px); aspect-ratio: 1; display: grid; place-items: center; position: relative;
+      border: 2px solid var(--gold); font-family: var(--serif); font-weight: 700; color: var(--gold);
+      font-size: clamp(1.7rem, 5.4vh, 2.7rem); letter-spacing: .04em;
+    }
+    .emblem .mark::before { content: ""; position: absolute; inset: 5px; border: 1px solid var(--hair); }
+    .emblem .cap { font-size: .95rem; color: var(--muted); line-height: 1.35; }
+    .home h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(2.8rem, min(8vw, 15vh), 7rem); line-height: .94; letter-spacing: -.015em; margin-top: clamp(1rem, 4vh, 2.2rem); }
+    .home .edu { font-family: var(--serif); font-size: clamp(1.3rem, min(2.6vw, 4.4vh), 1.9rem); font-weight: 500; color: var(--gold); }
+    .home .uni { color: var(--muted); margin-top: .35rem; }
+    .home .ph { width: min(100%, 440px); justify-self: center; max-height: 100%; aspect-ratio: 3 / 4; height: auto; }
+    .home .photo-col { height: 100%; display: grid; place-items: center; min-height: 0; padding-right: 12px; padding-bottom: 12px; }
+    .home .photo-col .ph { height: 100%; width: auto; max-width: 100%; }
+
+    /* ---------- 2. Profil ---------- */
+    .profile { grid-template-columns: 1fr 1fr; }
+    .profile .pcol { height: 100%; min-height: 0; padding: 0 12px 12px 0; }
+    .profile p.intro { font-size: clamp(1.05rem, min(1.5vw, 2.7vh), 1.3rem); line-height: 1.7; max-width: 36rem; }
+    .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: .9rem; margin-top: clamp(1.2rem, 4vh, 2rem); }
+    .fact { border-top: 1px solid var(--hair); padding-top: .8rem; }
+    .fact small { display: block; color: var(--muted); font-size: .85rem; }
+    .fact b { font-family: var(--serif); font-size: clamp(1.15rem, 2.2vw, 1.5rem); font-weight: 600; color: var(--gold); line-height: 1.2; display: block; margin-top: .2rem; }
+
+    /* ---------- 3. Pengalaman ---------- */
+    .xp { grid-template-rows: auto minmax(0, 1fr); align-items: stretch; gap: clamp(1rem, 3vh, 2rem); }
+    .xp .head p { color: var(--muted); margin-top: .5rem; }
+    .xp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.2rem, 3vw, 2.6rem); min-height: 0; }
+    .xp-card { display: flex; flex-direction: column; min-height: 0; padding: 0 12px 0 0; }
+    .xp-card .ph { flex: 1; margin-bottom: 12px; }
+    .xp-card .cat { color: var(--gold); font-size: .92rem; font-weight: 500; margin-top: 1rem; }
+    .xp-card h3 { font-family: var(--serif); font-weight: 600; font-size: clamp(1.4rem, min(2.4vw, 4vh), 1.9rem); line-height: 1.15; margin-top: .15rem; }
+    .xp-card .org { color: var(--muted); font-size: .98rem; margin-top: .2rem; }
+
+    /* ---------- 4. Kontak ---------- */
+    .contact { grid-template-columns: 1fr 1.05fr; }
+    .contact p.lead { color: var(--muted); max-width: 26rem; }
+    .c-list { display: grid; gap: 1.1rem; }
+    .c-card {
+      display: flex; align-items: center; gap: 1.3rem; text-decoration: none;
+      border: 1px solid var(--hair); padding: clamp(1.1rem, 3vh, 1.7rem) 1.6rem;
+      transition: background .25s, border-color .25s;
+    }
+    .c-card:hover { background: rgba(214, 187, 126, .1); border-color: var(--gold); }
+    .c-ico { width: 52px; height: 52px; flex: none; border: 1px solid var(--gold); display: grid; place-items: center; color: var(--gold); }
+    .c-ico svg { width: 24px; height: 24px; }
+    .c-card small { display: block; color: var(--muted); font-size: .88rem; }
+    .c-card b { font-family: var(--serif); font-weight: 600; font-size: clamp(1.25rem, 2.3vw, 1.75rem); overflow-wrap: anywhere; line-height: 1.2; display: block; }
+    .c-foot { margin-top: 2.2rem; display: flex; align-items: center; gap: .9rem; color: var(--muted); font-size: .92rem; }
+    .c-foot .mark { width: 38px; height: 38px; border: 1.5px solid var(--gold); display: grid; place-items: center; font-family: var(--serif); font-weight: 700; color: var(--gold); }
+
+    .rotate-hint { display: none; }
+
+    /* ---------- Layar pendek (ponsel lanskap) ---------- */
+    @media (max-height: 520px) {
+      .topbar { height: 54px; }
+      .controls { height: 62px; }
+      .inner { padding-top: 60px; padding-bottom: 68px; gap: 1.2rem; }
+      .rule { margin: .7rem 0; }
+      .btn-gold { margin-top: 1rem; padding: .6rem 1.1rem; }
+      .nav-btn { padding: .5rem 1rem; }
+      .xp-card .cat { margin-top: .5rem; font-size: .85rem; }
+      .xp-card .org, .home .uni { font-size: .88rem; }
+      .profile p.intro { font-size: .95rem; line-height: 1.5; }
+      .c-card { padding: .8rem 1.1rem; }
+      .c-foot { margin-top: 1rem; }
+      .xp .head p { display: none; }
+      h2.title { font-size: 1.9rem; }
+      .xp-card h3 { font-size: 1.2rem; }
+      .xp-card .org { font-size: .8rem; line-height: 1.3; min-height: 2.6em; }
+    }
+
+    /* ---------- Layar sempit / potret ---------- */
+    @media (max-width: 860px) and (min-height: 521px) {
+      .tabs { display: none; }
+      .inner { overflow-y: auto; align-items: start; padding-top: 80px; }
+      .home, .profile, .contact { grid-template-columns: 1fr; }
+      .home .photo-col { height: 340px; order: -1; justify-self: center; }
+      .profile .pcol { height: 260px; }
+      .xp-grid { grid-template-columns: 1fr; }
+      .xp-card .ph { flex: none; height: 220px; }
+      .facts { grid-template-columns: 1fr; }
+      .nav-btn .lbl { display: none; }
+      .rotate-hint { display: block; position: fixed; z-index: 19; left: 0; right: 0; bottom: 84px; text-align: center; font-size: .8rem; color: var(--muted); padding: 0 1rem; pointer-events: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .slide, .slide.active { transition: none; }
+      .tab::after, .dot { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <button class="mini-logo" data-go="0" aria-label="Kembali ke beranda">
+      <span class="mark" aria-hidden="true">NZ</span>
+      <span class="t">Naza Zuraida</span>
+    </button>
+    <nav class="tabs" aria-label="Navigasi halaman">
+      <button class="tab" data-go="0">Beranda</button>
+      <button class="tab" data-go="1">Profil</button>
+      <button class="tab" data-go="2">Pengalaman</button>
+      <button class="tab" data-go="3">Kontak</button>
+    </nav>
+  </header>
+
+  <main class="stage" id="stage">
+
+    <!-- ============ 1. BERANDA ============ -->
+    <section class="slide s-navy" style="--i:0" data-title="Beranda" data-color="#101B33" aria-label="Beranda">
+      <div class="inner home">
+        <div>
+          <div class="emblem">
+            <div class="mark" aria-hidden="true">NZ</div>
+          </div>
+          <h1>Naza<br>Zuraida</h1>
+          <div class="rule"></div>
+          <p class="edu">Mahasiswa S1 Teknik Logistik</p>
+          <p class="uni">Universitas Pendidikan Indonesia</p>
+          <button class="btn-gold" data-go="1">Lihat profil
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <div class="photo-col">
+          <!-- FOTO-DIRI.jpg -->
+          <div class="ph"><div class="ph-box">
+            <div class="ph-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4-6.5 8-6.5s7 2 8 6.5"/></svg>foto-naza.jpg</div>
+            <img src="FOTO-DIRI.jpg" alt="Foto Naza Zuraida" onerror="this.remove()">
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. PROFIL ============ -->
+    <section class="slide s-green" style="--i:1" data-title="Profil" data-color="#14352E" aria-label="Profil">
+      <div class="inner profile">
+        <div class="pcol">
+          <!-- foto upi.jpg -->
+          <div class="ph"><div class="ph-box">
+            <div class="ph-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 10l9-5 9 5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg>foto-upi.jpg</div>
+            <img src="foto upi.jpg" alt="Universitas Pendidikan Indonesia" onerror="this.remove()">
+          </div></div>
+        </div>
+        <div>
+          <h2 class="title">Profil</h2>
+          <div class="rule"></div>
+          <p class="intro">Halo, saya Naza Zuraida. Saat ini saya sedang menempuh pendidikan S1 Teknik Logistik di Universitas Pendidikan Indonesia. Saya berada di semester 5 dan sedang mempelajari salah satu mata kuliah, yaitu Logika Pemrograman, bersama dosen pengampu Bapak Aulia Zikri Rahman.</p>
+          <div class="facts">
+            <div class="fact"><small>Program studi</small><b>S1 Teknik Logistik</b></div>
+            <div class="fact"><small>Semester</small><b>5</b></div>
+            <div class="fact"><small>Mata kuliah</small><b>Logika Pemrograman</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. PENGALAMAN ============ -->
+    <section class="slide s-wine" style="--i:2" data-title="Pengalaman" data-color="#46192A" aria-label="Pengalaman">
+      <div class="inner xp">
+        <div class="head">
+          <h2 class="title">Pengalaman</h2>
+          <p>Pekerjaan, organisasi, dan komunitas yang membentuk cara saya bekerja.</p>
+        </div>
+        <div class="xp-grid">
+          <article class="xp-card">
+            <!-- foto-kerja.jpg -->
+            <div class="ph"><div class="ph-box">
+              <div class="ph-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>foto-honda.jpg</div>
+              <img src="foto-kerja.jpg" alt="Naza saat bekerja di Bengkel Motor Honda" onerror="this.remove()">
+            </div></div>
+            <p class="cat">Pengalaman kerja</p>
+            <h3>CS Bengkel</h3>
+            <p class="org">Bengkel Motor Honda</p>
+          </article>
+
+          <article class="xp-card">
+            <!-- foto-dpm.jpg -->
+            <div class="ph"><div class="ph-box">
+              <div class="ph-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>foto-dpm.jpg</div>
+              <img src="foto-dpm.jpg" alt="Naza saat menjadi DPM PA di HMTL" onerror="this.remove()">
+            </div></div>
+            <p class="cat">Pengalaman organisasi</p>
+            <h3>DPM PA</h3>
+            <p class="org">Himpunan Mahasiswa Teknik Logistik (HMTL)</p>
+          </article>
+
+          <article class="xp-card">
+            <!-- foto-komunita.jpg -->
+            <div class="ph"><div class="ph-box">
+              <div class="ph-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>foto-komunita.jpg</div>
+              <img src="foto-komunita.jpg" alt="Naza saat mengikuti kegiatan Komunita Kemenkeu Bandung" onerror="this.remove()">
+            </div></div>
+            <p class="cat">Pengalaman komunitas</p>
+            <h3>Anggota Aktif</h3>
+            <p class="org">Komunita Kemenkeu Bandung</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. KONTAK ============ -->
+    <section class="slide s-slate" style="--i:3" data-title="Kontak" data-color="#232B36" aria-label="Kontak">
+      <div class="inner contact">
+        <div>
+          <h2 class="title">Kontak</h2>
+          <div class="rule"></div>
+          <p class="lead">Terima kasih telah berkunjung. Silakan hubungi saya melalui kanal berikut.</p>
+          <div class="c-foot"><span class="mark" aria-hidden="true">NZ</span><span>Naza Zuraida &middot; Bandung</span></div>
+        </div>
+        <div class="c-list">
+          <a class="c-card" href="mailto:nazazuraida1919@gmail.com">
+            <span class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg></span>
+            <span><small>Email</small><b>nazazuraida1919@gmail.com</b></span>
+          </a>
+          <a class="c-card" href="https://www.instagram.com/zanazurai" target="_blank" rel="noopener">
+            <span class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r=".8" fill="currentColor"/></svg></span>
+            <span><small>Instagram</small><b>@zanazurai</b></span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <p class="rotate-hint">Putar layar ke mode lanskap untuk tampilan terbaik.</p>
+
+  <footer class="controls">
+    <button class="nav-btn" id="prev" aria-label="Halaman sebelumnya">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      <span class="lbl" id="prevLbl">Sebelumnya</span>
+    </button>
+    <div class="dots" role="group" aria-label="Pilih halaman">
+      <button class="dot" data-go="0" aria-label="Beranda"></button>
+      <button class="dot" data-go="1" aria-label="Profil"></button>
+      <button class="dot" data-go="2" aria-label="Pengalaman"></button>
+      <button class="dot" data-go="3" aria-label="Kontak"></button>
+    </div>
+    <button class="nav-btn" id="next" aria-label="Halaman berikutnya">
+      <span class="lbl" id="nextLbl">Berikutnya</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </footer>
+
+  <script>
+    (function () {
+      var stage = document.getElementById('stage');
+      var slides = Array.prototype.slice.call(stage.querySelectorAll('.slide'));
+      var triggers = document.querySelectorAll('[data-go]');
+      var tabs = document.querySelectorAll('.tab');
+      var dots = document.querySelectorAll('.dot');
+      var prev = document.getElementById('prev');
+      var next = document.getElementById('next');
+      var prevLbl = document.getElementById('prevLbl');
+      var nextLbl = document.getElementById('nextLbl');
+      var themeMeta = document.getElementById('themeColor');
+      var ids = ['beranda', 'profil', 'pengalaman', 'kontak'];
+      var titles = ['Beranda', 'Profil', 'Pengalaman', 'Kontak'];
+      var idx = 0;
+
+      function render() {
+        stage.style.setProperty('--cur', idx);
+        slides.forEach(function (s, i) {
+          s.classList.toggle('active', i === idx);
+          s.inert = i !== idx;
+          s.setAttribute('aria-hidden', i !== idx);
+        });
+        tabs.forEach(function (t, i) { i === idx ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current'); });
+        dots.forEach(function (d, i) { i === idx ? d.setAttribute('aria-current', 'page') : d.removeAttribute('aria-current'); });
+        prev.disabled = idx === 0;
+        prevLbl.textContent = idx > 0 ? titles[idx - 1] : '';
+        nextLbl.textContent = idx < slides.length - 1 ? titles[idx + 1] : 'Kembali ke beranda';
+        next.setAttribute('aria-label', idx < slides.length - 1 ? 'Ke halaman ' + titles[idx + 1] : 'Kembali ke beranda');
+        themeMeta.setAttribute('content', slides[idx].getAttribute('data-color'));
+        document.body.style.background = slides[idx].getAttribute('data-color');
+        document.title = (idx === 0 ? '' : titles[idx] + ' | ') + 'Naza Zuraida';
+        try { history.replaceState(null, '', '#' + ids[idx]); } catch (e) {}
+      }
+
+      function go(i) {
+        if (i < 0) i = 0;
+        if (i > slides.length - 1) i = 0;
+        idx = i;
+        render();
+      }
+
+      triggers.forEach(function (el) {
+        el.addEventListener('click', function () { go(parseInt(el.getAttribute('data-go'), 10)); });
+      });
+      prev.addEventListener('click', function () { go(idx - 1); });
+      next.addEventListener('click', function () { go(idx + 1); });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') go(idx + 1);
+        else if (e.key === 'ArrowLeft') go(idx - 1);
+        else if (e.key === 'Home') go(0);
+        else if (e.key === 'End') go(slides.length - 1);
+      });
+
+      // Geser jari pada layar sentuh
+      var sx = 0, sy = 0;
+      document.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+      document.addEventListener('touchend', function (e) {
+        var dx = e.changedTouches[0].clientX - sx;
+        var dy = e.changedTouches[0].clientY - sy;
+        if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) go(dx < 0 ? idx + 1 : idx - 1);
+      }, { passive: true });
+
+      // Buka langsung ke halaman tertentu lewat alamat, mis. #pengalaman
+      var start = ids.indexOf(location.hash.replace('#', ''));
+      idx = start > -1 ? start : 0;
+      slides.forEach(function (s) { s.style.transition = 'none'; });
+      render();
+      stage.offsetHeight;
+      slides.forEach(function (s) { s.style.transition = ''; });
+    })();
+  </script>
+</body>
+</html>
